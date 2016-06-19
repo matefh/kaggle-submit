@@ -23,6 +23,6 @@
     "system": "^1.0.6"
   },
   "bin": {
-    "kgl-submit": "index.js"
+    "kgl-submit": "submit.js"
   }
 }
