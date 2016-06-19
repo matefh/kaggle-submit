@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/local/bin/node
 
 var exports = require('exports');
 exports.printMsg = function() {
