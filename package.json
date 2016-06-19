@@ -23,6 +23,6 @@
     "system": "^1.0.6"
   },
   "bin": {
-    "kgl-submit": "submit.js"
+    "kaggle-submit": "submit.js"
   }
 }
