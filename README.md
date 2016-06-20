@@ -8,9 +8,7 @@ A command for submitting solutions to Kaggle competitions.
 
 ## Usage
 
-Then make sure that `node_modules/.bin` is in your `PATH`, so that the `kaggle-submit` is an executable command.
-
-You can also fallback to running via `node submit.js [options] [submission file]`.
+Make sure that `node_modules/.bin` is in your `PATH`, so that the `kaggle-submit` is an executable command.
 
 ```
   Usage: kaggle-submit [options]
@@ -24,3 +22,5 @@ You can also fallback to running via `node submit.js [options] [submission file]
     -p, --password <password>        your kaggle password
     -s, --submission <submission>    path to your submission file (csv/zip/gz/rar/7z)
 ```
+
+You can also fallback to running via `node submit.js [options]`.
