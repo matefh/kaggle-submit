@@ -1,14 +1,18 @@
 
-var YAML = require('js-yaml');
-var fs = require('fs');
 var system = require('system');
 var args = system.args;
-var conf = YAML.safeLoad(fs.read('config.yml'));
-
 var page = new WebPage(), testindex = 0, loadInProgress = false;
 
-page.onConsoleMessage = function(msg) {
+var competition = args[1],
+    username = args[2],
+    password = args[3],
+    submission = args[4];
+
+page.onConsoleMessage = function(msg, lineNum, sourceId) {
   console.log(msg);
+  if (msg == "Unexpected response code: 400") {
+    loadInProgress = false;
+  }
 };
 
 page.onLoadStarted = function() {
@@ -22,39 +26,28 @@ page.onLoadFinished = function() {
 var steps = [
   function() {
     //Load Login Page
-    page.open("https://www.kaggle.com/c/" + conf.competition + "/submissions/attach");
+    page.open("https://www.kaggle.com/c/" + competition + "/submissions/attach");
   },
   function() {
-    //Enter Credentials
+    //Enter Credentials and Login
     page.evaluate(function(u, p) {
       console.log("Logging in...");
       var form = document.getElementById("signin");
       form.elements["UserName"].value = u;
       form.elements["Password"].value = p;
-    }, conf.username, conf.password);
-  },
-  function() {
-    //Login
-    page.evaluate(function() {
       var form = document.getElementById("signin");
       form.submit();
-    });
+    }, username, password);
   },
   function() {
     // Upload submission
-    page.uploadFile("input[type='file']", args[1]);
+    page.uploadFile("input[type='file']", submission);
     page.evaluate(function() {
       var form = document.getElementById("submission-form");
       console.log("Uploading submission...");
       form.submit();
     });
   },
-  function() {
-    // Show last page
-    page.evaluate(function() {
-      //console.log(document.getElementsByClassName("submission-results")[0].innerHTML.trim());
-    });
-  }
 ];
 
 interval = setInterval(function() {
@@ -62,8 +55,8 @@ interval = setInterval(function() {
     steps[testindex]();
     testindex++;
   }
-  if (typeof steps[testindex] != "function") {
-    phantom.exit();
+  if (!loadInProgress && testindex == steps.length) {
+    setTimeout(function(){phantom.exit();}, 30000);
   }
 }, 50);
 
