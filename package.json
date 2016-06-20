@@ -18,12 +18,13 @@
     "url": "https://github.com/matefh/kaggle-submit.git"
   },
   "author": "Mohammad Atef <matefh@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",
     "exports": "0.0.1",
     "fs": "0.0.2",
     "js-yaml": "^3.6.1",
+    "lodash": "^4.13.1",
     "phantomjs": "^2.1.7",
     "system": "^1.0.6"
   },
