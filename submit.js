@@ -9,10 +9,6 @@ var path = require('path');
 var childProcess = require('child_process');
 var binPath = phantomjs.path;
 
-var YAML = require('js-yaml');
-var fs = require('fs');
-var conf = YAML.safeLoad(fs.readFileSync('config.yml'));
-
 exports.printMsg = function() {
   console.log("Use me to submit your solutions to Kaggle from command-line.");
 }
@@ -24,6 +20,7 @@ program
   .option('-p, --password <password>', 'your kaggle password')
   .option('-s, --submission <submission>', 'path to your submission file (csv/zip/gz/rar/7z)')
   .parse(process.argv);
+
 var inputs = [
   program.competition,
   program.username,
