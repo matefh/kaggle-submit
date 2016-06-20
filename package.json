@@ -1,6 +1,6 @@
 {
   "name": "kaggle-submit",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Submit your solutions to Kaggle competitions from command-line.",
   "main": "submit.js",
   "scripts": {
